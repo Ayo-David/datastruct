@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    let str = 'DABBCCA';
+
+    function first_recurring(str) {
+        count = {};
+        for (let i = 0; i <= str.length; i++) {
+            //for (let i = 0; i < str.length; i++) {
+            //console.log(str[i])
+            //count[str[i]] = 1;
+            //console.log(count)
+            if (!count[str[i]]) {
+                count[str[i]] = 1;
+            } else {
+                return str[i];
+            }
+        }
+        return "none found";
+    }
+
+    function count_recurring(str) {
+        count = {};
+        for (let i = 0; i <= str.length; i++) {
+            //for (let i = 0; i < str.length; i++) {
+            //console.log(str[i])
+            //count[str[i]] = 1;
+            //console.log(count)
+            if (!count[str[i]]) {
+                count[str[i]] = 1;
+            } else {
+                return str[i];
+            }
+        }
+        return "none found";
+    }
+
+    console.log(first_recurring(str));
+
+</script>
+
+</html>
