@@ -578,7 +578,7 @@ function stonewall(H) {
             //console.log('buildingblocks', countBlock)
         }
 
-        //add a new block if if stack is empty or the new block is higher 
+        //add a new block if the stack is empty or the new block is higher 
         //than the previous block Else (the height of current block is same as that
         // of previous one), they should be combined to one block.
         if (stack.length == 0 || H[i] > stack[stack.length - 1]) {
@@ -779,6 +779,37 @@ function passingCars() {
 }
 //let A = [0, 1, 0, 1, 1]
 //MISSING INTEGER
+function missingInt3(A) {//my solution - most prefered
+    //var onlyPositiveInt = [];
+    let onlyPositiveInt = new Array(A.length + 1).fill(0)
+    for (let i = 0; i < A.length; i++) {
+        if (A[i] > 0) onlyPositiveInt[A[i] - 1] = 1
+        console.log(A[i], onlyPositiveInt)
+    }
+    for (let i = 0; i <= onlyPositiveInt.length; i++) {
+        if (onlyPositiveInt[i] == 0) return i + 1
+    }
+    //return 1
+}
+function missingInt2(A) {//most prefered solution
+
+    var onlyPositiveInt = [];
+    //let onlyPositiveInt = new Array(A.length).fill(false)
+    //it scan through the array for +ve numbers and fill those positions with TRUE
+    for (var i = 0; i < A.length; i++) {
+        if (A[i] > 0) {
+            onlyPositiveInt[A[i]] = true;
+            console.log(A[i], onlyPositiveInt)
+        }
+    }
+    //the first position with false or empty apart from i=0 will be the missing number 
+    for (i = 1; i <= onlyPositiveInt.length; i++) {
+        if (!onlyPositiveInt[i]) {
+            return i;
+        }
+    }
+    return 1;
+}
 function missingInt(A) {
     let len = A.length
     let contain1 = 0
@@ -789,7 +820,8 @@ function missingInt(A) {
     }
     //if contain1 is still 0 return 1 - means 1 is not found
     if (contain1 == 0) return 1
-    //map the array with the index +1 to remove the ones available by changing them to -ve...changing them to zeros can not work because it will nollify the occurence of such number
+    //map the array with the index +1 to remove the ones available by changing them to -ve...changing 
+    //them to zeros can not work because it will nollify the occurence of such number
     for (let i = 0; i < len; i++) {
         let j = Math.abs(A[i]) - 1
         console.log(j)
@@ -887,6 +919,8 @@ function perm(A) {
 
 //FROG RIVER ONE
 //TRY TO ONLY ITERATE TO X THAT IS for(i=0; i<=X, i++)
+// this will not work because at point i==X its possible 
+//you haven't reached X
 // For example, given X = 5 and array A such that:
 
 // A[0] = 1
@@ -994,6 +1028,18 @@ function permMissing(A) {
     // console.log('final:', xor_sum)
     // return xor_sum ^ (A.length + 1);
 
+    //USING MAPPING - 100%
+    let B = new Set
+    for (a of A) {
+        B.add(a)
+        // console.log(B)
+    }
+    for (let i = 0; i <= A.length; i++) {
+        //console.log(i + 1)
+        if (!B.has(i + 1)) return i + 1
+    }
+
+
     //USING SUMMATION
     let sumMissing = 0;
     let sum = 0
@@ -1033,6 +1079,12 @@ function frogJmp(X, Y, D) {
     //    // console.log(X, 'count:', count)
     // }
     // return count;
+
+    let B = Y - X
+    let C = Math.ceil(B / D)
+    return C
+
+
     let distance = Y - X;
     let count = 0
     if (distance % D == 0) {

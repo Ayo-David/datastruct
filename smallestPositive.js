@@ -15,7 +15,7 @@
 // N is an integer within the range [1..100,000];
 // each element of array A is an integer within the range [−1,000,000..1,000,000].
 
-function smallestMissing(A) {
+function smallest(A) {
     let numbers = [];
     let smallestMissing = 1;
     for (i = 0; i <= A.length - 1; i++) {
@@ -41,7 +41,8 @@ function smallestMissing(A) {
 }
 
 
-let A = [1, 3, 6, 4, 1, 2];
+//let A = [1, 3, 6, 4, 1, 2];
+A = [7,-2,3,1,2,20,-5]
 //let A = [1, 2, 3, 4]
 //let A = [-1, -3] //1
 
