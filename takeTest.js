@@ -1,3 +1,7 @@
+//TWO SUMS
+
+
+
 //PEAKS
 A = [1, 4, 3, 4, 3, 3, 1, 2, 3, 4, 4, 2]
 console.log(peakss(A))
@@ -810,6 +814,8 @@ function missingInt2(A) {//most prefered solution
     }
     return 1;
 }
+
+
 function missingInt(A) {
     let len = A.length
     let contain1 = 0
@@ -840,7 +846,7 @@ function missingInt(A) {
 //A = [1, 2, 3]
 //A = [-1, -3]
 //A = [7, -2, 3, 2, 1, 20, -5]
-//console.log(missingInt(A))
+//console.log(missingInt2(A))
 //MAXCOUNTERS
 //console.log(passingCars(A))
 // (0, 0, 1, 0, 0)
@@ -874,11 +880,6 @@ function maxCounters(A, N) {
 //PERM CHECK
 // using array with includes is not a good solution - too much time complexity
 function permCheck2(A) {
-    // let set = [];
-    // if (A.length == 0) return 1
-    // for (i of A) {
-    //     set.add(i)
-    // }
 
     for (i = 0; i < A.length; i++) {
         if (!A.includes(i + 1)) return 0
