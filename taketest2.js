@@ -26,7 +26,7 @@ M = 6
 A = [3, 9, 4, 5, 5, 2,]
 //A = [3, 4, 5, 2, 5, 2,]
 
-console.log(distinct(A, M))
+//console.log(distinct(A, M))
 
 function distinctSlice(A) {
     let len = A.length
@@ -68,9 +68,9 @@ function caterpillar(A, s) {
     }
     // return 'none'
 }
-//s = 12
-//A = [6, 2, 7, 4, 1, 3, 6]
-//console.log(caterpillar(A, s))
+s = 12
+A = [6, 2, 7, 4, 1, 3, 6]
+console.log(caterpillar(A, s))
 
 function stoneWall(H) {
     stack = []

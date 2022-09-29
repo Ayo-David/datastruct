@@ -1,7 +1,8 @@
 // Input: s = "abcabcbb"
 // Output: 3
 // Explanation: The answer is "abc", with the length of 3.
-S = "dvdf"
+//S = "dvdf"
+S = "abcabcbb"
 function longestSubStr(S) {
     let memo = new Set()
     let max = 0, count = 0
@@ -23,7 +24,7 @@ function longestSubStr(S) {
     }
     return max
 }
-console.log(longestSubStr(S))
+//console.log(longestSubStr(S))
 
 
 
@@ -99,8 +100,8 @@ function count_recurring(str) {
 //console.log(first_recurring(str));
 splitStr = str.split('');
 str2 = str.substring(1, 4);//it keeps a new copy of the array and return the splice
-str4 = str.slice(1, 4);//it keeps a new copy of the array and return the splice
+str4 = str.splice(1, 4);//it keeps a new copy of the array and return the splice
 str3 = splitStr.pop(); //it removes the last and return a reduced array - compare str3 and splitStr
-//console.log(str3);
-//console.log(splitStr);
-//console.log(str);
+console.log(str3);
+console.log(splitStr);
+console.log(str4);

@@ -14,6 +14,56 @@
 
 // N is an integer within the range [1..100,000];
 // each element of array A is an integer within the range [−1,000,000..1,000,000].
+function smallestMissingSet(A) {
+    //using SET solution
+    let S = new Set()
+    let len = A.length
+    //let B = [0]
+    //if(!A.includes(1)) return 1 
+    for (let a of A) {
+        if (a > 0 && a <= len) {
+            S.add(a)
+        }
+        //(a>0 && a<=len) && S.add(a)
+    }
+    console.log(`foo = `, S.size)
+    if (S.size == 0) {
+        return 1
+    }
+    for (let i = 0; i < S.size; i++) {
+        //if (!B.includes(i + 1)) return i + 1
+        if (!S.has(i + 1)) return i + 1
+        //if(B[i]+1 != B[i+1]) return i + 1
+    }
+    return S.size + 1
+}
+
+
+function smallestMissingArray(A) {
+    //usin Array
+    //let S = new Set()
+    let len = A.length
+    let B = [0]
+    //if(!A.includes(1)) return 1 
+    for (let a of A) {
+        if (a > 0 && a <= len) {
+            B[a] = a
+        }
+        //(a>0 && a<=len) && S.add(a)
+    }
+    if (B) {
+        B.sort
+    } else {
+        return 1
+    }
+    for (let i = 0; i < B.length; i++) {
+        //if (!B.includes(i + 1)) return i + 1
+        if (B[i] + 1 != B[i + 1]) return i + 1
+    }
+}
+
+let A = [1, 2, 3] //1
+console.log(smallest(A))
 
 function smallest(A) {
     let numbers = [];
@@ -24,6 +74,7 @@ function smallest(A) {
             numbers[A[i]] = A[i];
         }
     }
+    console.log(`foo = `, numbers)
     if (numbers) {
         numbers.sort;
     } else {
@@ -32,6 +83,7 @@ function smallest(A) {
     //change all the unwanted numbers to 1 and then flip through the array
     //use this method to flip through the sorted main array...take note of the repeated number
     for (i = 0; i <= numbers.length - 1; i++) {
+        console.log(`B = `, numbers[i])
         if (numbers[i] == smallestMissing) {
             smallestMissing = i + 1
         }
@@ -42,7 +94,7 @@ function smallest(A) {
 
 
 //let A = [1, 3, 6, 4, 1, 2];
-A = [7,-2,3,1,2,20,-5]
+//let A = [7, -2, 3, 1, 2, 20, -5]
 //let A = [1, 2, 3, 4]
 //let A = [-1, -3] //1
 
@@ -64,13 +116,13 @@ function smallestMissing2(A) {
     //[-3, -5]
     //it means 1 is not in the list -> 1 becomems the smallest
     if (contain1 == 0) return 1
-    console.log('the numbers without anything < 0 or > length', A)
+    //console.log('the numbers without anything < 0 or > length', A)
 
     A.forEach((a, i) => {
         //search for index of a-1 (to make it zero base)
         let searchfor = Math.abs(a) - 1;
         if (A[searchfor] > 0) A[searchfor] = - A[searchfor];
-        console.log(A)
+        //console.log(A)
         //console.log(A[searchfor - 1])
     });
     //console.log('after mapping with index make all the available -ve', A)
@@ -90,7 +142,7 @@ function smallestMissing2(A) {
 
 }
 
-//console.log(smallestMissing2(A))
+
 
 const prefixSum = arr => {
 
@@ -114,7 +166,7 @@ const prefixSum = arr => {
 
 const prefixTestArray = [2, 4, 6, 8, 10, 12, 14]
 
-console.log(prefixSum(prefixTestArray))
+//console.log(prefixSum(prefixTestArray))
 
 const suffixSum = arr => {
     const n = arr.length
@@ -126,7 +178,7 @@ const suffixSum = arr => {
     for (let i = n - 2; i >= 0; i--) {
 
         result[i] = result[i + 1] + arr[i]
-        console.log(result[i])
+        //console.log(result[i])
     }
     return result
 }

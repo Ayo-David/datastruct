@@ -3,8 +3,8 @@
 
 
 //PEAKS
-A = [1, 4, 3, 4, 3, 3, 1, 2, 3, 4, 4, 2]
-console.log(peakss(A))
+//A = [1, 4, 3, 4, 3, 3, 1, 2, 3, 4, 4, 2]
+//console.log(peakss(A))
 function peakss(A) {
     let len = A.length
     let peaks = []
@@ -380,10 +380,10 @@ function maxSliceSum(A) {
 }
 //for better understanding try this two examples here 
 //(at any point whatever is lesser up to that point is discarded)
-//A = [1, -2, 6] 
+A = [1, -2, 6]
 //A = [-1, -2, 6]
 //A = [3, 2, -6, 4, 0]
-//console.log(maxSliceSum(A))
+console.log(maxSliceSum(A))
 
 //MAX PROFIT
 function maxProfit2(A) {
@@ -601,6 +601,32 @@ function stonewall(H) {
 //let H = [8, 5, 8, 7, 9, 8, 7, 7, 8]
 //console.log(stonewall2(H))
 
+//S = '()(()()(((()())(()()))'
+//console.log(`nesting = `, nessting(S))
+
+function nessting(S) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    if (S.length == 0) return 1
+    let hash = []
+    for (let i = 0; i < S.length; i++) {
+        if (S[i] == '(') {
+            hash.push(S[i])
+            console.log(`hash = `, hash)
+        } else {
+            if (hash[hash.length - 1] == '(') {
+                hash.pop()
+                console.log(`hash removed = `, hash)
+            } else {
+                return 0
+            }
+        }
+    }
+    if (hash.length == 0) {
+        return 1
+    } else { return 0 }
+}
+
+
 //NESTING
 function nesting(S) {
     //let A = Array(S).fill('') for this we dont need a stack, since it's either '(' or ')'
@@ -685,14 +711,14 @@ function fish(A, B) {
     }
     return count;
 }
-//A = [4, 0, 0, 5, 1]
+A = [4, 0, 0, 5, 1]
 //let A = [4, 3, 2, 1, 5]
 //let A = [0, 1]
 //let B = [1, 1]
 //let B = [0, 1, 0, 1, 0]
 //console.log(fish2(A, B))
 
-
+//console.log(`brac = `, bracket('{[()()]}'))
 //BRACKET
 //the idea here is set a counter and increment it for all the open brackets found -now decrement the
 //counter as you find close bracket in the iteration
@@ -700,7 +726,7 @@ function bracket(S) {
     let A = Array(S).fill('') // A=[] will also work
     let top = 0;
     if (S.length % 2 == 1) return 0;
-    //s in S will access the index of an array
+    //s in S will access the index of an object or array
     for (let s in S) {
         console.log('for bracket:', S[s], 'at', s)
         if ((S[s] == ')' && A[top - 1] == '(') || (S[s] == ']' && A[top - 1] == '[') || (S[s] == '}' && A[top - 1] == '{')) {
@@ -720,7 +746,7 @@ function bracket(S) {
 }
 //TRIANGLE
 function triangle(A) {
-    A.sort((a, b) => a - b)//to sort A = [10, 50, 5, 1] and not get [1, 10, 5, 50]
+    A.sort((a, b) => a - b) //to sort A = [10, 50, 5, 1] and not get [1, 10, 5, 50]
     console.log(A)
     for (i = 0; i < A.length; i++) {
         if ((A[i] + A[i + 1]) > A[i + 2]) return 1
@@ -740,6 +766,16 @@ function max3product(A) {
 //let A = [1, 3, 1, 2, 1, 1, 2]
 //A = [-5, -6, -4, -7, -10]
 //console.log(max3product(A))
+function maxThree(A) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    A.sort()
+    let len = A.length
+    let left = A[0] * A[1] * A[len - 1]
+    let right = A[len - 1] * A[len - 2] * A[len - 3]
+
+    return Math.max(left, right)
+}
+
 //DISTICT
 function distinct(A) {
     A.sort()
@@ -962,6 +998,35 @@ function frogRiver(A, X) {
 //let X = 3;
 //console.log(frogRiver(A, X))
 
+
+//Codility-MinAvgTwoSlice-JavaScript
+//The trick here is to figure out that you only need to find the minimum average of slices which are 2 or 3 in length. 
+//That is because a slice of 4 or larger is basically a sum of slices with the length of 2 or 3 . 
+//A composed slice will never have an average sum lower than its components.
+function minAvgTwoSlice(A) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    let len = A.length
+    let position = 0
+    let avg = 0
+    let min = (A[0] + A[1]) / 2
+
+    for (let i = 2; i < len; i++) {
+        avg = (A[i - 2] + A[i - 1] + A[i]) / 3
+        if (min > avg) {
+            min = avg
+            position = i - 2
+        }
+        avg = (A[i - 1] + A[i]) / 2
+        if (min > avg) {
+            min = avg
+            position = i - 1
+        }
+    }
+    return position
+}
+
+
+
 //TAPE EQUILIBRIUM
 function tapeEquil(A) {
 
@@ -1130,6 +1195,26 @@ function oddOccurrence(A) {
     //     }
     // }
 
+}
+
+function oddOccurrence2(A) {
+    // write your code in JavaScript (Node.js 8.9.4) 
+    let hash = {}
+    for (let a of A) {
+        console.log(`foiteo = `, a)
+        if (hash[a]) {
+            hash[a] += 1
+        } else {
+            hash[a] = 1
+        }
+    }
+    console.log(`foo = `, hash)
+
+    for (let i in hash) {
+        if (hash[i] % 2 === 1)
+            return parseInt(i)
+
+    }
 }
 //let A = [9, 3, 9, 3, 9, 7, 9]
 //console.log(oddOccurrence(A))
