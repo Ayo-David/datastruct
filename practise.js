@@ -164,7 +164,7 @@ const findUniqueNos = (R) => {
     })
     return uniqueNumbers
 }
-//console.log(findUniqueNos(R))
+console.log(findUniqueNos(R))
 //console.log(repeated(R))
 
 
@@ -173,12 +173,32 @@ const findUniqueNos = (R) => {
 // First output: true
 
 // Second input: {[({})}
-// Second output: falseFirst input: {[({})]}
-
-// First output: true
-
-// Second input: {[({})}
 // Second output: false
+
+
+stack = '{[({})}'
+const stackcheck = (stack) => {
+    let memo = []
+    let last = ''
+
+    for (let i = 0; i < stack.length; i++) {
+        if (stack[i] == '}' && last == '{' || stack[i] == ']' && last == '[' || stack[i] == ')' && last == '(') {
+            memo.pop()
+            last = memo[memo.length - 1]
+        } else {
+            memo[i] = stack[i]
+            last = stack[i]
+            console.log(`${memo}  ${last}`)
+        }
+    }
+    if (memo.length == 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
+//console.log(stackcheck(stack))
 
 
 
