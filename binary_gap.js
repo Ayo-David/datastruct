@@ -40,7 +40,7 @@ function binaryGap(number) {
         }
         //highest = Math.max(...memo);
         let highest = 1;
-        //thi works for object as memo
+        //this works for object as memo
         // for (i in memo) {
         //     if (memo[i] > highest) {
         //         highest = memo[i];
