@@ -165,7 +165,7 @@ function caesarCipher2(s, k) {
   return cipher.join('')
 }
 
-console.log(caesarCipher2('middle-Outz', 2))
+//console.log(caesarCipher2('middle-Outz', 2))
 
 function caesarCipher3(s, k) {
   const lowerA = "abcdefghijklmnopqrstuvwxyz"
@@ -183,5 +183,39 @@ function caesarCipher3(s, k) {
 
   return res.join("")
 }
+
+function countingSort(arr) {
+  let A = Array(100).fill(0)
+
+  for (let i of arr) {
+    A[i]++
+  }
+  return A
+}
+
+//console.log(countingSort(arr))
+
+function gridChallenge(grid) {
+  // Write your code here
+  let sorted = ''
+  let C = []
+  for (let i = 0; i < grid.length; i++) {
+    sorted = grid[i].split('').sort()
+    console.log(`sorted = `, sorted)
+    C.push(sorted)
+  }
+  for (let i = 0; i < grid.length - 1; i++) {
+    for (let j = 0; j < C[0].length; j++) {
+      if (C[i][j] > C[i + 1][j]) { return 'NO' }
+    }
+  }
+  return 'YES'
+  console.log(C)
+
+}
+grid = ['mpxz', 'abcd', 'wlmf']
+//grid = ['ebacd', 'fghij', 'olmkn', 'trpqs', 'xywuv']
+console.log(gridChallenge(grid))
+
 
 
