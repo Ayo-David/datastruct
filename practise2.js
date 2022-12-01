@@ -215,7 +215,59 @@ function gridChallenge(grid) {
 }
 grid = ['mpxz', 'abcd', 'wlmf']
 //grid = ['ebacd', 'fghij', 'olmkn', 'trpqs', 'xywuv']
-console.log(gridChallenge(grid))
+//console.log(gridChallenge(grid))
+
+function superDigit(n, k) {
+  // Write your code here
+  let s = ''
+  let sup = 0
+  for (let i = 0; i < k; i++) {
+    s += n
+  }
+
+  //console.log(`s = `, s)
+  //let t = s.split('')
+  while (s.length > 1) {
+    for (let i = 0; i < s.length; i++) {
+      sup += parseInt(s[i])
+    }
+    s = (sup).toString()
+    //console.log(`new t = `, t)
+    //console.log(`length = `, t.length)
+    sup = 0
+  }
+  return s
+}
+
+function superDigit2(n, k) {
+  let s = ''
+  let sup = 0
+  for (let i = 0; i < k; i++) {
+    s += n
+  }
+  return recurse(s)
+  function recurse(s) {
+    for (let i = 0; i < s.length; i++) {
+      sup += parseInt(s[i])
+    }
+    s = (sup).toString()
+    sup = 0
+    if (s.length > 1) {
+      return recurse(s)
+    } else {
+      return s
+    }
+  }
+}
+
+console.log(`super digit = `, superDigit2(148, 3))
+
+//parseInt - from string to int
+//toFixed(num) - to a particular num decimal places
+//toString  - from int to string
+//string.split('') - string to array 
+//array.join('') - from Array to String
+
 
 
 
