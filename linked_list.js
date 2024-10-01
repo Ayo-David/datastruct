@@ -1,40 +1,96 @@
 class Node {
-    constructor(content) {
-        this.content = content;
-        this.next = null;
-    }
+  constructor(content) {
+    this.content = content;
+    this.next = null;
+  }
 }
 
 class LinkedList {
-    constructor(head = null) {
-        this.head = head;
+  constructor(head = null) {
+    this.head = head;
+  }
+
+  size() {
+    let count = 0;
+    let node = this.head;
+    while (node) {
+      node = node.next;
+      count++;
+    }
+    return count;
+  }
+  clear() {
+    this.head = null;
+  }
+  getFirst() {
+    return this.head;
+  }
+  getLast() {
+    while (this.head) {
+      if (this.head.next == null) {
+        return this.head;
+      }
+      this.head = this.head.next;
+    }
+  }
+
+  addAt(data, i) {
+    let current = this.head;
+    let newNode = new Node(data);
+    let count = 0;
+    while (current) {
+      current = current.next;
+      count++;
+      if (count === i) {
+        newNode.next = current.next;
+        current.next = newNode;
+        return;
+      }
+    }
+  }
+
+  size() {
+    let current = this.head;
+    if (current === null) return 0;
+    let count = 0;
+    while (current) {
+      current = current.next;
+      count++;
+    }
+    return count;
+  }
+
+  removeTop() {
+    let current = this.head;
+    if (current == null) return;
+    this.head = current.next;
+    //current.next = null
+  }
+
+  remooveBottom() {
+    let current = this.head;
+
+    while (current) {
+      current = current.next;
+      if (current.next.next == null) {
+        current.next == null;
+      }
     }
 
-    size() {
-        let count = 0;
-        let node = this.head;
-        while (node) {
-            node = node.next;
-            count++;
-        }
-        return count;
+    while(current){
+      this.head = current.next
+      current = current.next
+    }
+  }
 
-    }
-    clear() {
-        this.head = null;
-    }
-    getFirst() {
-        return this.head
-    }
-    getLast() {
+  removeAt(index){
+    let current = this.head;
 
-        while (this.head) {
-            if (this.head.next == null) {
-                return this.head;
-            }
-            this.head = this.head.next;
-        }
+    for(let i=0; i<index, i++){
+current = current.next
     }
+    current.next = current.next.next
+  }
 }
 
 let node1 = new Node(4);

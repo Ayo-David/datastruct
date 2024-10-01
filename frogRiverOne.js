@@ -1,4 +1,3 @@
-
 //console.log(minimumConcat("abc", "abcbc"));
 
 // A small frog wants to get to the other side of a river. The frog is initially located on one bank of the river (position 0) and wants to get to the opposite bank (position X+1). Leaves fall from a tree onto the surface of the river.
@@ -44,8 +43,6 @@
 // N and X are integers within the range [1..100,000];
 // each element of array A is an integer within the range [1..X].
 
-
-
 //======================SOLUTIONS========================//
 
 // function solution(X, A) {
@@ -73,7 +70,7 @@
 // }
 
 // function solution(X, A) {
-//     // write your code in JavaScript (Node.js 6.4.0) 
+//     // write your code in JavaScript (Node.js 6.4.0)
 
 //     let sequence = [0];
 //     let position = -1;
@@ -100,108 +97,91 @@
 //     return position;
 // }
 
-
-
 //let A = [1]
 //let A = [1, 1, 2, 5, 3, 4, 3]
-let A = [1, 3, 1, 4, 2, 3, 5, 4]
+let A = [1, 3, 3, 2, 2, 1, 4, 2, 3, 5, 4];
 //USING SET
 function earliestTime3(X, A) {
-    fallingLeaves = new Set();
-    anyEmpty = -1;
+  fallingLeaves = new Set();
+  anyEmpty = -1;
 
-    for (i = 0; i <= A.length - 1; i++) {
-        //console.log('leave at', i, 'is', A[i]);
-        if (A[i] <= X) {
-            fallingLeaves.add(A[i])
-            console.log('Falling leaves', fallingLeaves);
-        }
-        //if any position is empty it will never return this value
-        if (fallingLeaves.size == X) return i
-
-
+  for (i = 0; i <= A.length - 1; i++) {
+    //console.log('leave at', i, 'is', A[i]);
+    if (A[i] <= X) {
+      fallingLeaves.add(A[i]);
+      console.log("Falling leaves", fallingLeaves);
     }
-    return anyEmpty;
-
+    //if any position is empty it will never return this value
+    if (fallingLeaves.size == X) return i;
+  }
+  return anyEmpty;
 }
 
 //using array as the fallingLeaves hash table
 function earliestTime2(X, A) {
+  let fallingLeaves = [0];
+  let position = 0;
+  let anyEmpty = -1;
 
-    let fallingLeaves = [0];
-    let position = 0;
-    let anyEmpty = -1;
+  // if (X === 1 && A[0] === 1)
+  //     return 0;
+  console.log("Initial falling leaves", fallingLeaves);
 
+  for (let i = 0; i <= A.length - 1; i++) {
+    if (A[i] <= X) {
+      console.log("leaves", A[i]);
+      if (!fallingLeaves[A[i]]) {
+        //position only increases for a new leaf we never had
+        position++;
+      }
+      //array will always update what was there and add new if it was not there before
+      fallingLeaves[A[i]] = A[i];
+      console.log("Falling leaves", fallingLeaves);
 
-    // if (X === 1 && A[0] === 1)
-    //     return 0;
-    console.log('Initial falling leaves', fallingLeaves);
-
-    for (let i = 0; i <= A.length - 1; i++) {
-        if (A[i] <= X) {
-            console.log('leaves', A[i])
-            if (!fallingLeaves[A[i]]) {
-                //position only increases for a new leaf we never had
-                position++;
-            }
-            //array will always update what was there and add new if it was not there before
-            fallingLeaves[A[i]] = A[i];
-            console.log('Falling leaves', fallingLeaves);
-
-            //just to help us know when to stop and  also to return the time it takes if there's no empty
-            if (position === X) {
-                anyEmpty = i;
-                break;
-
-            }
-        }
-
+      //just to help us know when to stop and  also to return the time it takes if there's no empty
+      if (position === X) {
+        anyEmpty = i;
+        break;
+      }
     }
-    return anyEmpty;
-
+  }
+  return anyEmpty;
 }
-
-
-
-
 
 //solution using object hash table
 
 function earliestTime(X, A) {
-    //IF USING OBJECT DONT EQUATE THE FIRST OBJECT TO  0 - OBJECT will see 0 as IF THAT ENTRY DOES NOT EXIST
-    let fallingLeaves = {};
-    let count = 0;
+  //IF USING OBJECT DONT EQUATE THE FIRST OBJECT TO  0 - OBJECT will see 0 as IF THAT ENTRY DOES NOT EXIST
+  let fallingLeaves = {};
+  let count = 0;
 
-    for (let i = 0; i <= A.length - 1; i++) {
+  for (let i = 0; i <= A.length - 1; i++) {
+    console.log("Leaves", A[i]);
+    if (A[i] <= X) {
+      if (!fallingLeaves[A[i]]) {
+        fallingLeaves[A[i]] = i + 1; //IF USING OBJECT DONT START i as 0 - OBJECT will see 0 as IF IT DOESNOT EXIST
+        count++;
+        console.log("Falling Leaves", fallingLeaves, "and count is:", count);
+      }
 
-        console.log('Leaves', A[i])
-        if (A[i] <= X) {
-
-            if (!fallingLeaves[A[i]]) {
-                fallingLeaves[A[i]] = i + 1 //IF USING OBJECT DONT START i as 0 - OBJECT will see 0 as IF IT DOESNOT EXIST
-                count++;
-                console.log('Falling Leaves', fallingLeaves, 'and count is:', count)
-            }
-
-            if (count == X) return i;
-        }
+      if (count == X) return i;
     }
-    //run through the falling leaves if any is missing and find the highest time value
-    // let earliest = 0
-    // for (j = 1; j <= X; j++) {
-    //     if (fallingLeaves[j]) {
-    //         if (earliest < fallingLeaves[j]) {
-    //             earliest = fallingLeaves[j];
-    //         }
-    //     } else {
-    //         return -1;
+  }
+  //run through the falling leaves if any is missing and find the highest time value
+  // let earliest = 0
+  // for (j = 1; j <= X; j++) {
+  //     if (fallingLeaves[j]) {
+  //         if (earliest < fallingLeaves[j]) {
+  //             earliest = fallingLeaves[j];
+  //         }
+  //     } else {
+  //         return -1;
 
-    //     }
+  //     }
 
-    // }
-    //return earliest;
-    return -1;
-
+  // }
+  //return earliest;
+  return -1;
 }
 
-console.log('Earliest Time for frog to jump:', earliestTime(3, A))
+console.log("Earliest Time for frog to jump:", earliestTime(4, A));

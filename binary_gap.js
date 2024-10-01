@@ -61,5 +61,30 @@ function binaryGap(number) {
 
 }
 
-console.log('The highest count of zeros:', binaryGap(647));
+function binarygap(s) {
+    let b = s.toString(2)
+    console.log(`b = `, b)
+    let first = b.indexOf(0)
+    let last = b.lastIndexOf(1)
+    let max = 0
+    let count = 0
+
+    if (last == 0) return 0
+
+    for (let i = first; i <= last; i++) {
+        if (b[i] == 0) {
+            console.log(`b[i] = `, b[i])
+            count++
+        } else {
+            console.log(`b[i] = `, b[i])
+            console.log(`count = `, count)
+            if (count > max) max = count
+            count = 0
+        }
+    }
+
+    return max
+}
+
+console.log('The highest count of zeros:', binarygap(647));
 

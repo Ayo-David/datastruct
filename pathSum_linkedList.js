@@ -1,4 +1,4 @@
-import { Node, LinkedList } from "./linked_list";
+//import { Node, LinkedList } from "./linked_list";
 
 let node1 = new TreeNode(5, 4, 8);
 let node2 = new TreeNode(4, 11, null);
@@ -16,13 +16,11 @@ let node13 = new TreeNode(1);
 
 root = new TreeNode([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1]);
 
-
-
 // Definition for a binary tree node.
 function TreeNode(val, left, right) {
-    this.val = (val === undefined ? 0 : val)
-    this.left = (left === undefined ? null : left)
-    this.right = (right === undefined ? null : right)
+  this.val = val === undefined ? 0 : val;
+  this.left = left === undefined ? null : left;
+  this.right = right === undefined ? null : right;
 }
 
 /**
@@ -32,31 +30,45 @@ function TreeNode(val, left, right) {
  */
 
 var pathSum = function (root, targetSum) {
+  //   if (!root) {
+  //     return [];
+  //   }
+  //   result = [];
 
-    if (!root) {
-        return [];
+  //   function pathSumHelper(node, sum, path) {
+  //     path.push(node.val);
+
+  //     if (!node.right && !node.left && sum === node.val) {
+  //       result.push(path);
+  //     }
+
+  //     if (node.left) {
+  //       pathSumHelper(node.left, sum - node.val, path.slice());
+  //     }
+  //     if (node.right) {
+  //       pathSumHelper(node.right, sum - node.val, path.slice());
+  //     }
+  //   }
+  //   pathSumHelper(root, targetSum, []);
+  //   return result;
+  if (!root) return false;
+  let hasPath = false;
+  const loopNode = (node, sum) => {
+    if (node.left === null && node.right === null) {
+      if (sum == node.val) hasPath = true;
+      return;
     }
-    result = [];
 
-    function pathSumHelper(node, sum, path) {
-        path.push(node.val);
-
-        if (!node.right && !node.left && sum === node.val) {
-            result.push(path);
-        }
-
-        if (node.left) {
-            pathSumHelper(node.left, sum - node.val, path.slice());
-        }
-        if (node.right) {
-            pathSumHelper(node.right, sum - node.val, path.slice());
-        }
-
+    if (node.left) {
+      loopNode(node.left, sum - node.val);
     }
-    pathSumHelper(root, targetSum, []);
-    return result;
-
+    if (node.right) {
+      loopNode(node.right, sum - node.val);
+    }
+    console.log(`the sum is now = `, sum);
+  };
+  loopNode(root, targetSum);
+  return hasPath;
 };
-
 
 console.log(pathSum(root, 22));
