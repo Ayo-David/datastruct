@@ -29,8 +29,10 @@ function minimumPeople(A) {
   return sum;
 }
 
-A = [1, 2, 1, 2, 3, 2, 2];
-//console.log(`minimum = `, minimumPeople(A));
+//A = [1, 2, 1, 2, 3, 2, 2];
+
+A = [2, 2, 2, 2, 2, 2, 2, 3];
+console.log(`minimum = `, minimumPeople(A));
 
 //using Map - Map works exactly like using Object as hash table - it can contain key and value
 //the major difference btw map and object is that oject keys are string but map key could be any datatype
@@ -179,21 +181,23 @@ function sumofSquares(a) {
 }
 //console.log(`sumofSquares = `, sumofSquares(10));
 
+S = "xoooxo";
 function xoPoints(S) {
-  let countX = 0;
+  let countX = 1;
   let countO = 0;
   let sum = 0;
   let max = 0;
-  if (S[0] == "x") {
-    countX = 1;
-  }
-  for (let i = 1; i < S.length; i++) {
+  let idx = S.split("").indexOf("x");
+  // if (S[0] == "x") {
+  //   countX = 1;
+  // }
+  for (let i = idx + 1; i < S.length; i++) {
     if (S[i] == "o") {
       countO++;
     }
   }
   max = countX + countO;
-  for (let i = 1; i < S.length; i++) {
+  for (let i = idx + 1; i < S.length; i++) {
     if (S[i] == "x") {
       countX++;
     } else {
@@ -205,9 +209,8 @@ function xoPoints(S) {
 
   return max;
 }
-S = "xoooxo";
 
-//console.log(`xoPoints = `, xoPoints(S));
+console.log(`xoPoints = `, xoPoints(S));
 
 //Given a string find the length of the longest substring without repeating characters.
 //Example:
@@ -267,4 +270,87 @@ function validString(s) {
   return "Invalid";
 }
 
-console.log(`valid string = `, validString(s));
+//console.log(`valid string = `, validString(s));
+
+//A = [2, 2, 2, 2, 2, 2, 2, 3];
+
+function minPeople(A) {
+  let map = new Map();
+  for (let a of A) {
+    if (map.has(a)) {
+      let get = map.get(a);
+      map.set(a, get + 1);
+    } else {
+      map.set(a, 1);
+    }
+  }
+
+  let count = 0;
+  for (let [k, v] of map) {
+    console.log(k, v);
+    let occurence = Math.ceil(v / (k + 1));
+    count += (k + 1) * occurence;
+  }
+  return count;
+}
+
+//console.log(`minPpl = `, minPeople(A));
+//A = [1, -2, 6];
+function maxSum(A) {
+  let max = A[0];
+  let slice = A[0];
+
+  for (let i = 1; i < A.length; i++) {
+    let newSlice = slice + A[i];
+    slice = Math.max(newSlice, A[i]);
+    max = Math.max(max, slice);
+  }
+  return max;
+}
+
+//console.log(`maxSum = `, maxSum(A));
+A = [4, 1, 4, 2];
+A = [2, 3, 4, 5];
+function convert2Perm(A) {
+  let N = A.length;
+  A.sort((a, b) => a - b);
+
+  let totalCost = 0;
+
+  // Iterate and calculate the total cost to transform each element to its target value
+  for (let i = 0; i < N; i++) {
+    totalCost += Math.abs(arr[i] - (i + 1));
+  }
+
+  return totalCost;
+}
+
+function minDistanceToChar(s, t) {
+  const n = s.length;
+  const d = new Array(n).fill(Infinity);
+
+  // Traverse from left to right
+  let lastPos = -Infinity; // Initially no 't' found
+  for (let i = 0; i < n; i++) {
+    if (s[i] === t) {
+      lastPos = i; // Update the last seen 't' position
+    }
+    d[i] = Math.abs(i - lastPos);
+  }
+
+  // Traverse from right to left
+  lastPos = Infinity; // Reset for right-to-left traversal
+  for (let i = n - 1; i >= 0; i--) {
+    if (s[i] === t) {
+      lastPos = i; // Update the last seen 't' position
+    }
+    d[i] = Math.min(d[i], Math.abs(i - lastPos)); // Get the minimum distance
+  }
+
+  return d;
+}
+
+// Example usage:
+//const s = "loveleetcode";
+//const t = "e";
+//console.log(minDistanceToChar(s, t)); // Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
